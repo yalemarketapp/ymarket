@@ -1,7 +1,7 @@
-import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import LoggedOutStackNavigator from './navigation/LoggedOutStackNavigator';
+import React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { NavigationContainer } from '@react-navigation/native'
+import LoggedOutStackNavigator from './navigation/LoggedOutStackNavigator'
 
 export default function App() {
   return (
@@ -10,5 +10,5 @@ export default function App() {
         <LoggedOutStackNavigator />
       </NavigationContainer>
     </SafeAreaProvider>
-  );
+  )
 }

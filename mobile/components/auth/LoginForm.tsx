@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import React, { FC, useState } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Text, TextInput } from '../building-blocks'
-import { validateYaleEmail } from '../../utility/validators'
+import { validateYaleEmail, validatePassword } from '../../utility/validators'
 import * as colors from '../../constants/colors'
 import ymarket from '../../api/ymarket'
 
@@ -12,18 +12,13 @@ const LoginForm: FC = () => {
   const [password, setPassword] = useState({ value: '', error: '' })
 
   const onLoginPressed = async () => {
+    // TODO: https://linear.app/ymarket/issue/YMA-17/navigate-to-home-screen-after-login
     await ymarket.post('api/users/login/', { email: email.value, password: password.value }).catch((err) => {
       if (err.response) {
         const error = err.response.data[Object.keys(err.response.data)[0]]
         setPassword({ ...password, error })
       }
     })
-  }
-
-  const validatePassword = (value: string) => {
-    if (value.length < 8) return 'Must be at least 8 characters'
-
-    return ''
   }
 
   return (
@@ -41,8 +36,8 @@ const LoginForm: FC = () => {
           onChangeText={(value) => setEmail({ ...email, value })}
           autoCapitalize="none"
           autoCorrect={false}
+          margin={styles.outerInput}
         />
-        <View style={{ margin: 5 }} />
         <TextInput
           style={styles.input}
           label="Password"
@@ -85,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   outerInput: {
-    marginVertical: 10,
+    marginVertical: 5,
   },
   forgotPasswordContainer: {
     alignItems: 'flex-end',

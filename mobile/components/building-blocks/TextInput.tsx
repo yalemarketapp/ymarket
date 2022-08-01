@@ -1,13 +1,15 @@
 import React, { FC } from 'react'
-import { TextInput as RNTextInput, StyleSheet } from 'react-native'
+import { TextInput as RNTextInput, StyleSheet, View as RNView } from 'react-native'
 import type { TextInputProps as RNTextInputProps } from 'react-native'
 import * as colors from '../../constants/colors'
 import Text from './Text'
 import InputCaption from '../InputCaption'
+import { marginStyling } from '../../types'
 
 type TextInputProps = {
   label?: string
   error?: string
+  margin?: marginStyling
 } & Pick<
   RNTextInputProps,
   | 'autoCapitalize'
@@ -25,11 +27,11 @@ type TextInputProps = {
   | 'maxLength'
 >
 
-const TextInput: FC<TextInputProps> = ({ label, error, ...props }) => {
+const TextInput: FC<TextInputProps> = ({ label, error, margin, ...props }) => {
   const errorStyle = error ? { borderColor: colors.errorRed } : {}
 
   return (
-    <>
+    <RNView style={[styles.container, margin]}>
       {label && <Text style={[styles.label, { marginBottom: 2 }]} value={label} />}
       <RNTextInput
         placeholderTextColor={colors.darkerGray}
@@ -37,11 +39,14 @@ const TextInput: FC<TextInputProps> = ({ label, error, ...props }) => {
         style={[styles.textInput, props.style, errorStyle]}
       />
       <InputCaption style={{ marginTop: 2 }} isError={!!error} caption={error} />
-    </>
+    </RNView>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
   label: {
     fontSize: 10,
     color: colors.darkerGray,

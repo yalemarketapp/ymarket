@@ -23,7 +23,7 @@ const HelperPrompt: FC<HelperPromptProps> = ({ text, keyPhrase, onPress }) => {
 const styles = StyleSheet.create({
   authHelperContainer: {
     flexDirection: 'row',
-    marginTop: 24,
+    marginTop: 16,
   },
   authHelperText: {
     fontSize: 14,

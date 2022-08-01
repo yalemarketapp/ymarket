@@ -7,3 +7,8 @@ export type marginStyling = {
   marginLeft?: number
   marginRight?: number
 }
+
+export type formInput = {
+  value: string
+  error: string
+}

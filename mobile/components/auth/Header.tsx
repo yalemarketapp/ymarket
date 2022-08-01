@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { StyleSheet, Image, View } from 'react-native'
-import { Text } from '../../components/building-blocks'
+import { StyleSheet, Image } from 'react-native'
+import { Text } from '../building-blocks'
 import * as colors from '../../constants/colors'
 
 type HeaderProps = {
@@ -9,28 +9,25 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ text }) => {
   return (
-    <View style={styles.container}>
+    <>
       <Image source={require('../../assets/logo.png')} style={styles.image} />
       <Text style={styles.header} value={text} />
-    </View>
+    </>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 100,
-  },
   image: {
     width: 85,
     height: 75,
-    marginBottom: 20,
+    marginBottom: 15,
     alignSelf: 'center',
   },
   header: {
     color: colors.mainBlue,
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 40,
+    marginBottom: 25,
   },
 })
 

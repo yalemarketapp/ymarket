@@ -3,7 +3,7 @@ import { TextInput as RNTextInput, StyleSheet, View as RNView } from 'react-nati
 import type { TextInputProps as RNTextInputProps } from 'react-native'
 import * as colors from '../../constants/colors'
 import Text from './Text'
-import InputCaption from '../InputCaption'
+import Caption from '../Caption'
 import { marginStyling } from '../../types'
 
 type TextInputProps = {
@@ -38,7 +38,7 @@ const TextInput: FC<TextInputProps> = ({ label, error, margin, ...props }) => {
         {...props}
         style={[styles.textInput, props.style, errorStyle]}
       />
-      <InputCaption style={{ marginTop: 2 }} isError={!!error} caption={error} />
+      {!!error && <Caption style={{ marginTop: 2 }} isError={!!error} caption={error} />}
     </RNView>
   )
 }

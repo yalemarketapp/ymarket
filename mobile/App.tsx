@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { FC, useContext } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import LoggedOutStackNavigator from './navigation/LoggedOutStackNavigator'
+import BaseTabNavigator from './navigation/BaseTabNavigator'
+import SplashScreen from './screens/SplashScreen'
+import AuthContext, { AuthProvider } from './hooks/AuthContext'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { UserProvider } from './hooks/UserContext'
+import WithYMarketApi from './api/WithYMarketApi'
+
+function App() {
+  const { loading: loadingProfile, accessToken } = useContext(AuthContext)
+
+  if (loadingProfile) {
+    return <SplashScreen />
+  }
+
+  const loggedInRoot = (
+    <UserProvider>
+      <BaseTabNavigator />
+    </UserProvider>
+  )
+  const loggedOutRoot = <LoggedOutStackNavigator />
+
+  return <NavigationContainer>{accessToken ? loggedInRoot : loggedOutRoot}</NavigationContainer>
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const AppContainer: FC = () => {
+  return (
+    <AuthProvider>
+      <WithYMarketApi>
+        <App />
+      </WithYMarketApi>
+    </AuthProvider>
+  )
+}
+
+export default AppContainer

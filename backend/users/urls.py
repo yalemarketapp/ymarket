@@ -10,13 +10,16 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='account_logout'),
 
     path('verify-email/', VerifyEmailView.as_view()),
-    path('resend-verification/', ResendEmailVerificationView.as_view(), name='account_resend_email_verification'),
+    path('resend-verification/', ResendEmailVerificationView.as_view(),
+         name='account_resend_email_verification'),
     path('account-confirm-email/<str:key>/', JsonConfirmEmailView.as_view()),
-    path('account-confirm-email/', VerifyEmailView.as_view(), name='account_email_verification_sent'),
+    path('account-confirm-email/', VerifyEmailView.as_view(),
+         name='account_email_verification_sent'),
     re_path(r'^account-confirm-email/(?P<key>[-:\w]+)/$',
-         VerifyEmailView.as_view(), name='account_confirm_email'),
+            VerifyEmailView.as_view(), name='account_confirm_email'),
 
     path('password-reset/', PasswordResetView.as_view()),
-    path('password-reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password-reset/confirm/<uidb64>/<token>/',
+         PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('password-change/', PasswordChangeView.as_view()),
 ]

@@ -1,4 +1,8 @@
 export type LoggedOutStackParamList = {
-  Login: undefined
-  Register: undefined
+  Login: { email: string }
+  Register: { email: string }
+}
+
+export type BaseTabNavigatorParamList = {
+  Home: undefined
 }

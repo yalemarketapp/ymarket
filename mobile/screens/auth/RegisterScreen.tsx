@@ -9,10 +9,10 @@ import ymarket from '../../api/ymarket'
 import SubmitButton from '../../components/auth/SubmitButton'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
 
-const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigation }) => {
+const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, navigation }) => {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
   const [lastName, setLastName] = useState({ value: '', error: '' })
-  const [email, setEmail] = useState({ value: '', error: '' })
+  const [email, setEmail] = useState({ value: route.params.email, error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [passwordConfirm, setPasswordConfirm] = useState({ value: '', error: '' })
   const [formError, setFormError] = useState('')
@@ -20,6 +20,9 @@ const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigat
   const onSignUpPressed = async () => {
     if (firstName.error || lastName.error || email.error || password.error || passwordConfirm.error) {
       setFormError('Please fix the errors before submitting.')
+      return
+    } else if (!firstName.value || !lastName.value || !email.value || !password.value || !passwordConfirm.value) {
+      setFormError("Form values can't be empty")
       return
     }
 
@@ -79,7 +82,11 @@ const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigat
       <Header text="Create an Account" />
       <InputContainer inputs={inputDetails} />
       <SubmitButton label="Sign Up" onSubmit={onSignUpPressed} error={formError} />
-      <HelperPrompt text="Already have an account? " keyPhrase="Login" onPress={() => navigation.navigate('Login')} />
+      <HelperPrompt
+        text="Already have an account? "
+        keyPhrase="Login"
+        onPress={() => navigation.navigate('Login', { email: email.value })}
+      />
     </SafeAreaView>
   )
 }

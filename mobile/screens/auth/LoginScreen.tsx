@@ -11,8 +11,8 @@ import ymarket from '../../api/ymarket'
 import SubmitButton from '../../components/auth/SubmitButton'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
 
-const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigation }) => {
-  const [email, setEmail] = useState({ value: '', error: '' })
+const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, navigation }) => {
+  const [email, setEmail] = useState({ value: route.params?.email || '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [formError, setFormError] = useState('')
 
@@ -20,9 +20,11 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigation
     if (email.error || password.error) {
       setFormError('Please fix the errors before submitting.')
       return
+    } else if (!email.value || !password.value) {
+      setFormError("Form values can't be empty")
+      return
     }
 
-    // TODO: https://linear.app/ymarket/issue/YMA-17/navigate-to-home-screen-after-login
     await ymarket.post('api/users/login/', { email: email.value, password: password.value }).catch((err) => {
       if (err.response) {
         const error = err.response.data[Object.keys(err.response.data)[0]]
@@ -59,7 +61,7 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ navigation
       <HelperPrompt
         text="Don't have an account? "
         keyPhrase="Sign up"
-        onPress={() => navigation.navigate('Register')}
+        onPress={() => navigation.navigate('Register', { email: email.value })}
       />
     </SafeAreaView>
   )

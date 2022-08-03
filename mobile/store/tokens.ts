@@ -1,22 +1,17 @@
 import { getItemAsync, setItemAsync, deleteItemAsync } from 'expo-secure-store'
 
-const ACCESS = 'ACCESS'
 const REFRESH = 'REFRESH'
-
-const getAccessToken = async () => {
-  return await getItemAsync(ACCESS)
-}
 
 const getRefreshToken = async () => {
   return await getItemAsync(REFRESH)
 }
 
-const clearAuthTokens = async () => {
-  await Promise.all([deleteItemAsync(ACCESS), deleteItemAsync(REFRESH)])
+const clearRefreshToken = async () => {
+  await deleteItemAsync(REFRESH)
 }
 
-const setAuthTokens = async ({ access, refresh }: { access: string; refresh?: string }) => {
-  await Promise.all([setItemAsync(ACCESS, access), refresh ? setItemAsync(REFRESH, refresh) : undefined])
+const setRefreshToken = async (refresh: string) => {
+  await setItemAsync(REFRESH, refresh)
 }
 
-export default { getAccessToken, getRefreshToken, clearAuthTokens, setAuthTokens }
+export default { getRefreshToken, clearRefreshToken, setRefreshToken }

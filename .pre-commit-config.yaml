@@ -1,0 +1,26 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.4.0
+    hooks:
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: no-commit-to-branch
+        name: No commits to dev
+        args: [--branch, dev]
+
+  - repo: local
+    hooks:
+      - id: eslint-mobile
+        name: eslint-mobile
+        language: system
+        entry: ./scripts/pre_commit.sh mobile "yarn lint"
+        files: ^mobile/
+        types_or: [javascript, ts, jsx, tsx, yaml]
+        stages: [commit]
+      - id: prettier-mobile
+        name: prettier-mobile
+        language: system
+        files: ^mobile/
+        types_or: [javascript, ts, jsx, tsx, yaml, scss, css, html]
+        entry: ./scripts/pre_commit.sh mobile "yarn prettier"

@@ -1,0 +1,13 @@
+#!/bin/bash
+# https://pre-commit.com/
+
+SUBDIR=$1
+shift
+SUBDIR_SCRIPT=$1
+shift
+FILES=$*
+
+SUBDIR_STRIPPED_FILES=${FILES//$SUBDIR\//}
+
+cd $SUBDIR
+$SUBDIR_SCRIPT $SUBDIR_STRIPPED_FILES

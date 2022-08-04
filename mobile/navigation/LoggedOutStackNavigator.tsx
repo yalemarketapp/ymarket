@@ -1,3 +1,4 @@
+import React from 'react'
 import { LoggedOutStackParamList } from './NavigationTypes'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import LoginScreen from '../screens/auth/LoginScreen'

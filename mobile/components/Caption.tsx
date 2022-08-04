@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import Text from './building-blocks/Text'
 import { StyleProp, StyleSheet, TextStyle } from 'react-native'
 import * as colors from '../constants/colors'

@@ -1,4 +1,4 @@
-import { createContext, FC, useState } from 'react'
+import React, { createContext, FC, useState } from 'react'
 import { UserType } from '../types'
 
 type UserContextType = { user: UserType; setUser: (user: UserType) => void }

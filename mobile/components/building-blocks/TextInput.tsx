@@ -4,12 +4,12 @@ import type { TextInputProps as RNTextInputProps } from 'react-native'
 import * as colors from '../../constants/colors'
 import Text from './Text'
 import Caption from '../Caption'
-import { marginStyling } from '../../types'
+import { MarginStyling } from '../../types'
 
 type TextInputProps = {
   label?: string
   error?: string
-  margin?: marginStyling
+  margin?: MarginStyling
 } & Pick<
   RNTextInputProps,
   | 'autoCapitalize'

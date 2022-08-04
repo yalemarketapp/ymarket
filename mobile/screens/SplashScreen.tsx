@@ -17,7 +17,7 @@ export default function SplashScreen() {
     }
 
     getNewAccessToken()
-  }, [])
+  }, [setLoadingProfile])
 
   return (
     <View style={styles.container}>

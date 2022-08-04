@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { StyleSheet, Text as RNText, TextProps as RNTextProps } from 'react-native'
 
 type TextProps = { value: string } & Pick<RNTextProps, 'style'>

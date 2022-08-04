@@ -53,7 +53,7 @@ const WithYMarketApi: FC = ({ children }) => {
         return ymarket(config)
       },
     )
-  }, [])
+  }, [signIn, signOut])
 
   return <>{children}</>
 }

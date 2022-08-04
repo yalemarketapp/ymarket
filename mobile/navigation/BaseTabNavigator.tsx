@@ -1,3 +1,4 @@
+import React from 'react'
 import { BaseTabNavigatorParamList } from './NavigationTypes'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../screens/HomeScreen'

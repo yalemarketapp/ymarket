@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { NativeSyntheticEvent, StyleSheet, TextInputEndEditingEventData, View } from 'react-native'
-import { formInput } from '../../types'
+import { FormInput } from '../../types'
 import { TextInput } from '../building-blocks'
 
 type InputContainerProps = {
@@ -21,8 +21,8 @@ const InputContainer: FC<InputContainerProps> = ({ inputs }) => {
 
 export type InputProps = {
   label: string
-  state: formInput
-  setState: (state: formInput) => void
+  state: FormInput
+  setState: (state: FormInput) => void
   validate?: (value: string) => string
   type?: 'email' | 'password' | undefined
 }

@@ -1,3 +1,5 @@
+fail_fast: true
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
@@ -11,16 +13,17 @@ repos:
 
   - repo: local
     hooks:
-      - id: eslint-mobile
-        name: eslint-mobile
-        language: system
-        entry: ./scripts/pre_commit.sh mobile "yarn lint"
-        files: ^mobile/
-        types_or: [javascript, ts, jsx, tsx, yaml]
-        stages: [commit]
       - id: prettier-mobile
         name: prettier-mobile
         language: system
         files: ^mobile/
         types_or: [javascript, ts, jsx, tsx, yaml, scss, css, html]
-        entry: ./scripts/pre_commit.sh mobile "yarn prettier"
+        stages: [commit]
+        entry: ./scripts/pre_commit.sh mobile "yarn run:prettier"
+      - id: eslint-mobile
+        name: eslint-mobile
+        language: system
+        files: ^mobile/
+        types_or: [javascript, ts, jsx, tsx, yaml]
+        stages: [commit]
+        entry: ./scripts/pre_commit.sh mobile "yarn lint"

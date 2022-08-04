@@ -9,7 +9,7 @@ export type RefreshTokenType = JwtPayload & {
 }
 
 // Components
-export type formInput = {
+export type FormInput = {
   value: string
   error: string
 }
@@ -28,7 +28,7 @@ export type UserProfileType = {
 }
 
 // Utility
-export type marginStyling = {
+export type MarginStyling = {
   margin?: number
   marginHorizontal?: number
   marginVertical?: number

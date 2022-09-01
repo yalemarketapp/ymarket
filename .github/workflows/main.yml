@@ -12,6 +12,9 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.10']
+    env:
+      SECRET_KEY: '{{ secrets.SECRET_KEY }}'
+      EMAIL_HOST_PASSWORD: '{{ secrets.EMAIL_HOST_PASSWORD }}'
 
     steps:
     - name: Checkout Repo

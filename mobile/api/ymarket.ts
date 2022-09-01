@@ -7,6 +7,6 @@ const ymarket = axios.create({
   },
 })
 
-// Interceptors are handled in YMarket.tsx
+// Interceptors are handled in WithYMarketApi.tsx
 
 export default ymarket

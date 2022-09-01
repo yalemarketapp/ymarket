@@ -8,6 +8,7 @@ import { validateYaleEmail, validatePassword, validateConfirmPassword } from '..
 import ymarket from '../../api/ymarket'
 import SubmitButton from '../../components/auth/SubmitButton'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
+import { ScrollView } from 'react-native'
 
 const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, navigation }) => {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
@@ -79,14 +80,16 @@ const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, 
 
   return (
     <SafeAreaView>
-      <Header text="Create an Account" />
-      <InputContainer inputs={inputDetails} />
-      <SubmitButton label="Sign Up" onSubmit={onSignUpPressed} error={formError} />
-      <HelperPrompt
-        text="Already have an account? "
-        keyPhrase="Login"
-        onPress={() => navigation.navigate('Login', { email: email.value })}
-      />
+      <ScrollView contentContainerStyle={{ alignItems: 'center', paddingVertical: 10 }}>
+        <Header text="Create an Account" />
+        <InputContainer inputs={inputDetails} />
+        <SubmitButton label="Sign Up" onSubmit={onSignUpPressed} error={formError} />
+        <HelperPrompt
+          text="Already have an account? "
+          keyPhrase="Login"
+          onPress={() => navigation.navigate('Login', { email: email.value })}
+        />
+      </ScrollView>
     </SafeAreaView>
   )
 }

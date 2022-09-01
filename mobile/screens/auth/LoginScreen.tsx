@@ -51,10 +51,13 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, nav
   ]
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ justifyContent: 'center', alignItems: 'center' }}>
       <Header text="Welcome Back!" />
       <InputContainer inputs={inputDetails} />
-      <TouchableOpacity style={styles.forgotPasswordContainer}>
+      <TouchableOpacity
+        style={styles.forgotPasswordContainer}
+        onPress={() => navigation.navigate('ResetPassword', { email: email.value })}
+      >
         <Text style={styles.forgotPassword} value="Forgot your password?" />
       </TouchableOpacity>
       <SubmitButton label="Login" onSubmit={onLoginPressed} error={formError} />

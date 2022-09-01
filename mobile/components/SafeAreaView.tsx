@@ -11,7 +11,7 @@ const SafeAreaView: FC<ViewProps> = ({ children, ...props }) => {
 }
 
 const styles = StyleSheet.create({
-  view: { flex: 1, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center' },
+  view: { flex: 1, backgroundColor: 'white' },
 })
 
 export default SafeAreaView

@@ -51,15 +51,16 @@ jobs:
       - name: Install Dependencies
         working-directory: ./mobile
         run: yarn install
-      - name: Run Tests
-        working-directory: ./mobile
-        run: yarn jest
       - name: Run Prettier
         working-directory: ./mobile
         run: yarn prettier:check
       - name: Run Lint
         working-directory: ./mobile
         run: yarn lint
-      - name: Run Typecheck
-        working-directory: ./mobile
-        run: yarn typecheck
+  
+  dagger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dagger Test
+        working-directory: .
+        run: dagger do test

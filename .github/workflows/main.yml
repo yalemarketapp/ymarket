@@ -18,7 +18,7 @@ jobs:
 
     steps:
     - name: Checkout Repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Set Up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Dependencies
         working-directory: ./mobile
         run: yarn install
@@ -61,8 +61,9 @@ jobs:
   dagger:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Run Dagger Test
         uses: dagger/dagger-for-github@v3
         with:
-          version: 1.0.0
           cmds: do test

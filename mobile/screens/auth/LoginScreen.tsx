@@ -56,7 +56,7 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, nav
       <InputContainer inputs={inputDetails} />
       <TouchableOpacity
         style={styles.forgotPasswordContainer}
-        onPress={() => navigation.navigate('ResetPassword', { email: email.value })}
+        onPress={() => navigation.navigate('WTSODIJFIOWEJ', { email: email.value })}
       >
         <Text style={styles.forgotPassword} value="Forgot your password?" />
       </TouchableOpacity>

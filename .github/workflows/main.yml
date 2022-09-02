@@ -63,5 +63,6 @@ jobs:
     steps:
       - name: Run Dagger Test
         uses: dagger/dagger-for-github@v3
-        working-directory: .
-        run: dagger do test
+        with:
+          version: 1.0.0
+          cmds: do test

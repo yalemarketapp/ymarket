@@ -15,10 +15,10 @@ export type FormInput = {
 }
 
 // Frontend models
-export type UserType = UserProfileType
+export type UserType = ProfileType
 
 // Backend models
-export type UserProfileType = {
+export type ProfileType = {
   avatar_url: string
   biography: string
   email: string

@@ -4,6 +4,11 @@ export type LoggedOutStackParamList = {
   ResetPassword: { email: string }
 }
 
+export type ProfileStackParamList = {
+  Profile: undefined
+}
+
 export type BaseTabNavigatorParamList = {
   Home: undefined
+  ProfileRoot: undefined
 }

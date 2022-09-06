@@ -8,6 +8,7 @@ import UserContext from '../../hooks/UserContext'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ProfileStackParamList } from '../../navigation/NavigationTypes.d'
 import AuthContext from '../../hooks/AuthContext'
+import { CommonActions } from '@react-navigation/native'
 
 const ProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation }) => {
   const { user } = useContext(UserContext)
@@ -15,6 +16,12 @@ const ProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation
 
   const onLogout = () => {
     signOut()
+    navigation.dispatch((state) => {
+      return CommonActions.reset({
+        ...state,
+        index: 0,
+      })
+    })
   }
 
   return (

@@ -9,6 +9,7 @@ import ymarket from '../../api/ymarket'
 import SubmitButton from '../../components/auth/SubmitButton'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
 import { ScrollView } from 'react-native'
+import { encrypt } from '../../utility/encrypt'
 
 const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, navigation }) => {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
@@ -33,8 +34,8 @@ const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, 
         email: email.value,
         first_name: firstName.value,
         last_name: lastName.value,
-        password1: password.value,
-        password2: passwordConfirm.value,
+        password1: await encrypt(password.value),
+        password2: await encrypt(passwordConfirm.value),
       })
       .catch(function (err) {
         // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests

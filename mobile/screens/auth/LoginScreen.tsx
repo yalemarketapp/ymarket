@@ -10,6 +10,7 @@ import { validateYaleEmail, validatePassword } from '../../utility/validators'
 import ymarket from '../../api/ymarket'
 import SubmitButton from '../../components/auth/SubmitButton'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
+import { encrypt } from '../../utility/encrypt'
 
 const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, navigation }) => {
   const [email, setEmail] = useState({ value: route.params?.email || '', error: '' })
@@ -25,13 +26,15 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, nav
       return
     }
 
-    await ymarket.post('api/users/login/', { email: email.value, password: password.value }).catch((err) => {
-      // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests
-      if (err.response) {
-        const error = err.response.data[Object.keys(err.response.data)[0]]
-        setFormError(error)
-      }
-    })
+    await ymarket
+      .post('api/users/login/', { email: email.value, password: await encrypt(password.value) })
+      .catch((err) => {
+        // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests
+        if (err.response) {
+          const error = err.response.data[Object.keys(err.response.data)[0]]
+          setFormError(error)
+        }
+      })
   }
 
   const inputDetails: InputProps[] = [

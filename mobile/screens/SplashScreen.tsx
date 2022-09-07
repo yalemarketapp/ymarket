@@ -10,10 +10,7 @@ export default function SplashScreen() {
   useEffect(() => {
     const getNewAccessToken = async () => {
       const refresh = await tokens.getRefreshToken()
-      ymarket
-        .post('api/token/refresh/', { refresh })
-        .then(() => null)
-        .catch(() => setLoadingProfile(false))
+      ymarket.post('api/token/refresh/', { refresh }).catch(() => setLoadingProfile(false))
     }
 
     getNewAccessToken()

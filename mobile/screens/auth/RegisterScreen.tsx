@@ -37,6 +37,7 @@ const RegisterScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, 
         password2: passwordConfirm.value,
       })
       .catch(function (err) {
+        // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests
         if (err.response) {
           const error = err.response.data[Object.keys(err.response.data)[0]]
           setFormError(error)

@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   logout: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: 'white',
+    color: colors.white,
   },
   logoutButton: {
     padding: 10,

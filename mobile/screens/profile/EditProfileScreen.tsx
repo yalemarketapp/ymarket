@@ -2,7 +2,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import React, { FC, useContext, useState } from 'react'
 import UserContext from '../../hooks/UserContext'
 import { ProfileStackParamList } from '../../navigation/NavigationTypes'
-import * as ImagePicker from 'expo-image-picker'
+import { launchImageLibraryAsync, MediaTypeOptions } from 'expo-image-picker'
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import Text from '../../components/building-blocks/Text'
 import SafeAreaView from '../../components/SafeAreaView'
@@ -21,8 +21,8 @@ const EditProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ naviga
   const [image, setImage] = useState(user.avatar_url)
 
   const addImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    const result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,

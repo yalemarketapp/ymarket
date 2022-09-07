@@ -26,6 +26,7 @@ const LoginScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ route, nav
     }
 
     await ymarket.post('api/users/login/', { email: email.value, password: password.value }).catch((err) => {
+      // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests
       if (err.response) {
         const error = err.response.data[Object.keys(err.response.data)[0]]
         setFormError(error)

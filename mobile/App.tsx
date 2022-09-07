@@ -4,12 +4,11 @@ import LoggedOutStackNavigator from './navigation/LoggedOutStackNavigator'
 import BaseTabNavigator from './navigation/BaseTabNavigator'
 import SplashScreen from './screens/SplashScreen'
 import AuthContext, { AuthProvider } from './hooks/AuthContext'
-
 import { UserProvider } from './hooks/UserContext'
 import WithYMarketApi from './api/WithYMarketApi'
 
 function App() {
-  const { loading: loadingProfile, accessToken } = useContext(AuthContext)
+  const { loading: loadingProfile, loggedIn } = useContext(AuthContext)
 
   if (loadingProfile) {
     return <SplashScreen />
@@ -22,7 +21,7 @@ function App() {
   )
   const loggedOutRoot = <LoggedOutStackNavigator />
 
-  return <NavigationContainer>{accessToken ? loggedInRoot : loggedOutRoot}</NavigationContainer>
+  return <NavigationContainer>{loggedIn ? loggedInRoot : loggedOutRoot}</NavigationContainer>
 }
 
 const AppContainer: FC = () => {

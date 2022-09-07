@@ -31,6 +31,7 @@ const ResetPasswordScreen: FC<StackScreenProps<LoggedOutStackParamList>> = ({ ro
       .post('api/users/password-reset/', { email: email.value })
       .then((res) => navigation.navigate('Login', { email: email.value }))
       .catch((err) => {
+        // TODO: https://linear.app/ymarket/issue/MOB-42/fix-error-handling-from-http-requests
         if (err.response) {
           const error = err.response.data[Object.keys(err.response.data)[0]]
           setFormError(error)

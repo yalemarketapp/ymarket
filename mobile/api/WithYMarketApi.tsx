@@ -5,10 +5,11 @@ import AuthContext from '../hooks/AuthContext'
 
 // Interceptors are handled in a React component so they have access to AuthContext
 const WithYMarketApi: FC = ({ children }) => {
-  const { accessToken, signIn, signOut } = useContext(AuthContext)
+  const { signIn, signOut } = useContext(AuthContext)
 
   // If accessToken is defined, use it in all requests
   ymarket.interceptors.request.use(async (config) => {
+    const accessToken = await tokens.getAccessToken()
     if (config.headers) {
       config.headers.Authorization = accessToken ? `Bearer ${accessToken}` : ''
     }
@@ -28,7 +29,7 @@ const WithYMarketApi: FC = ({ children }) => {
           signIn(response.data.access)
         } else if (response.data.detail === 'Successfully logged out.') {
           signOut()
-          tokens.clearRefreshToken()
+          tokens.clearTokens()
         }
 
         return response

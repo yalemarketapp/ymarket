@@ -6,6 +6,7 @@ import SplashScreen from './screens/SplashScreen'
 import AuthContext, { AuthProvider } from './hooks/AuthContext'
 import { UserProvider } from './hooks/UserContext'
 import WithYMarketApi from './api/WithYMarketApi'
+import 'react-native-get-random-values'
 
 function App() {
   const { loading: loadingProfile, loggedIn } = useContext(AuthContext)

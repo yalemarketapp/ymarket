@@ -11,6 +11,7 @@ import ProfilePhoto from '../../components/ProfilePhoto'
 import * as colors from '../../constants/colors'
 import InputContainer, { InputProps } from '../../components/auth/InputContainer'
 import BackButton from '../../components/BackButton'
+import { v4 as uuidv4 } from 'uuid'
 
 const EditProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation }) => {
   const { user, setUser } = useContext(UserContext)
@@ -61,7 +62,8 @@ const EditProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ naviga
     formData.append('last_name', lastName.value)
     formData.append('biography', biography.value)
     if (image) {
-      formData.append('files', image)
+      // Stringify then parse is a workaround. See https://github.com/g6ling/React-Native-Tips/issues/1#issuecomment-526870226
+      formData.append('file', JSON.parse(JSON.stringify({ uri: image, name: `${uuidv4()}.jpg`, type: 'image/jpg' })))
     }
 
     await ymarket

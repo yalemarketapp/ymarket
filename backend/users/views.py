@@ -16,9 +16,10 @@ from posts.imgur_helpers import upload_image_imgur
 
 UserModel = get_user_model()
 
+
 class UserProfileView(mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    generics.GenericAPIView):
+                      mixins.UpdateModelMixin,
+                      generics.GenericAPIView):
     queryset = UserModel.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated, IsUserOrReadOnly]
@@ -29,15 +30,16 @@ class UserProfileView(mixins.RetrieveModelMixin,
     def update(self, request, *args, **kwargs):
         partial = kwargs.pop('partial', False)
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer = self.get_serializer(
+            instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
 
-        # upload and save url for image avatar for this user profile 
+        # upload and save url for image avatar for this user profile
         image_url = None
-        file_list = request.FILES.getlist('files')
-        if len(file_list) > 0: 
+        file_list = request.FILES.getlist('file')
+        if len(file_list) > 0:
             image_url = upload_image_imgur(file_list[0])
-            
+
         self.perform_update(serializer, image_url)
 
         if getattr(instance, '_prefetched_objects_cache', None):
@@ -48,13 +50,14 @@ class UserProfileView(mixins.RetrieveModelMixin,
         return Response(serializer.data)
 
     def perform_update(self, serializer, image_url):
-        if image_url is not None: 
+        if image_url is not None:
             serializer.save(avatar_url=image_url)
-        else: 
-            serializer.save() 
+        else:
+            serializer.save()
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
 
 class JsonConfirmEmailView(views.APIView, ConfirmEmailView):
     def get(self, *args, **kwargs):

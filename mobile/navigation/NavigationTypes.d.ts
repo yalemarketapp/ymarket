@@ -6,6 +6,7 @@ export type LoggedOutStackParamList = {
 
 export type ProfileStackParamList = {
   Profile: undefined
+  EditProfile: undefined
 }
 
 export type BaseTabNavigatorParamList = {

@@ -1,18 +1,19 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { NativeSyntheticEvent, StyleSheet, TextInputEndEditingEventData, View } from 'react-native'
 import { FormInput } from '../../types'
 import { TextInput } from '../building-blocks'
 
 type InputContainerProps = {
   inputs: InputProps[]
+  marginVertical?: number
 }
 
 const InputContainer: FC<InputContainerProps> = ({ inputs }) => {
   return (
     <>
       <View style={styles.formContainer}>
-        {inputs.map(({ label, state, setState, validate, type }) => (
-          <Input key={label} label={label} state={state} setState={setState} validate={validate} type={type} />
+        {inputs.map(({ label, state, setState, validate, type, ...props }, i) => (
+          <Input key={i} label={label} state={state} setState={setState} validate={validate} type={type} {...props} />
         ))}
       </View>
     </>
@@ -20,14 +21,15 @@ const InputContainer: FC<InputContainerProps> = ({ inputs }) => {
 }
 
 export type InputProps = {
-  label: string
+  label: string | ReactNode
   state: FormInput
   setState: (state: FormInput) => void
   validate?: (value: string) => string
   type?: 'email' | 'password' | undefined
+  multiline?: boolean
 }
 
-const Input: FC<InputProps> = ({ label, state, setState, validate, type }) => {
+const Input: FC<InputProps> = ({ label, state, setState, validate, type, ...props }) => {
   const { value, error } = state
 
   const emailProps = {
@@ -50,6 +52,7 @@ const Input: FC<InputProps> = ({ label, state, setState, validate, type }) => {
   return (
     <TextInput
       {...extraProps}
+      {...props}
       style={styles.input}
       label={label}
       value={value}

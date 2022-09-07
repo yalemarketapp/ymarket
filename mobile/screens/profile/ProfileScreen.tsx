@@ -8,7 +8,7 @@ import UserContext from '../../hooks/UserContext'
 import { StackScreenProps } from '@react-navigation/stack'
 import { ProfileStackParamList } from '../../navigation/NavigationTypes.d'
 import AuthContext from '../../hooks/AuthContext'
-import { CommonActions } from '@react-navigation/native'
+import { Feather } from '@expo/vector-icons'
 
 const ProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation }) => {
   const { user } = useContext(UserContext)
@@ -16,12 +16,6 @@ const ProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation
 
   const onLogout = () => {
     signOut()
-    navigation.dispatch((state) => {
-      return CommonActions.reset({
-        ...state,
-        index: 0,
-      })
-    })
   }
 
   return (
@@ -34,6 +28,13 @@ const ProfileScreen: FC<StackScreenProps<ProfileStackParamList>> = ({ navigation
           <Text value={`${user.first_name} ${user.last_name}`} style={styles.name} />
           <Text value={user.email} style={styles.email} />
         </View>
+        <Feather
+          style={{ marginLeft: 'auto', marginRight: 15 }}
+          name="edit"
+          size={24}
+          color={colors.darkestGray}
+          onPress={() => navigation.navigate('EditProfile')}
+        />
       </View>
       {user.biography ? <Text style={styles.biography} value={user.biography} /> : null}
       <TouchableOpacity style={styles.logoutButton} onPress={onLogout}>
